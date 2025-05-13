@@ -1,0 +1,29 @@
+# Asegúrate de tener pandas importado como pd
+df = pd.read_csv('datos_ventas.csv')
+
+# Mostrar las primeras 5 filas
+print(df.head())
+
+# Total de ventas
+print("Total de ventas:", df['Ventas'].sum())
+
+# Promedio de precio
+print("Promedio de precio:", df['Precio'].mean())
+
+# Producto más vendido
+producto_mas_vendido = df.groupby('Producto')['Ventas'].sum().idxmax()
+print("Producto más vendido:", producto_mas_vendido)
+
+# Productos vendidos en enero de 2025
+enero_ventas = df[df['Fecha'].str.startswith('2025-01')]
+print("Ventas en enero 2025:\n", enero_ventas)
+
+# Gráfico de ventas por producto
+ventas_por_producto = df.groupby('Producto')['Ventas'].sum()
+ventas_por_producto.plot(kind='bar', color='orange')
+plt.title('Cantidad Total Vendida por Producto')
+plt.xlabel('Producto')
+plt.ylabel('Total de Ventas')
+plt.grid(True)
+plt.tight_layout()
+plt.show()
